@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model List<Chef>;
+<h1 class="display-4">Welcome</h1>
+
+
+<div class="text-center">
+    <a href="/new">Add a Chef</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th># of Dishes</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in ViewBag.ChefList)
+            {
+                <tr>
+                    <td>@c.FirstName @c.LastName</td>
+                    @if (DateTime.Now.DayOfYear < @c.DOB.DayOfYear)
+                    {
+                        <td>@((DateTime.Now.Year - @c.DOB.Year )- 1)</td>
+                    }
+                    else
+                    {
+                        <td>@(DateTime.Now.Year - @c.DOB.Year)</td>
+                    }
+                    @if (c.DishList != null)
+                    {
+                        <td>@c.DishList.Count</td>
+                    }
+                    else
+                    {
+                        <td>0</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
